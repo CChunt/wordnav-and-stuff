@@ -9,10 +9,10 @@ This repository contains a collection of files that explore English word embeddi
 - [card](#cards)
 
 ## word_navigator
-This dude contains some stuff that utilizes the word embeddings save to `GoogleNews-vectors-negative300.bin`.
+This dude contains some stuff that utilizes the word embeddings downloadable at: [Google News Word Vectors](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?resourcekey=0-wjGZdNAUop6WykTtMip30g). The file is too large for GitHub, so you will have to download and add to folder yourself.
 
 ## nbapi
-`nba_api_fun.ipynb` within this folder contains various various code chunks that compile data or create graphs from the NBA stats API. Time-out errors tend to occur with this webscraper if many request are sent to the website in a short period of time, so specific data sets were created and pickled allow quick access. One goal of this project was to crack the [Hoop Grids](hoopgrids.com) games, which involves finding every player who played for a certain team or in a certain decade so those datasets were collected.
+`nba_api_fun.ipynb` within this folder contains various various code chunks that compile data or create graphs from the NBA stats API. Time-out errors tend to occur with this webscraper if many request are sent to the website in a short period of time, so specific data sets were created and pickled allow quick access. One goal of this project was to crack the [Hoop Grids](https://hoopgrids.com) games, which involves finding every player who played for a certain team or in a certain decade so those datasets were collected.
 
 ## cards
 Video poker is a single player variant of the game where the player is dealt five cards, then they may select which of the five to keep or replace to build the most winning hand they can. This file contains Numba Just In Time (JIT) optimized code that allows for simulation of millions of hands in the span of seconds. Portions are dedicated to finding the best possible action (out of 32 total actions) for a certain scenario, while others are dedicated to finding the expected return given a machines specific payout table.
