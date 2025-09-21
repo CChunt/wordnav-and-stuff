@@ -18,3 +18,8 @@ This dude contains some stuff that utilizes the word embeddings downloadable at:
 Video poker is a single player variant of the game where the player is dealt five cards, then they may select which of the five to keep or replace to build the most winning hand they can. This file contains Numba Just In Time (JIT) optimized code that allows for simulation of millions of hands in the span of seconds. Portions are dedicated to finding the best possible action (out of 32 total actions) for a certain scenario, while others are dedicated to finding the expected return given a machines specific payout table.
 
 <3
+---
+### Credits
+
+Compound word dataset:
+Gagné, C.L., Spalding, T.L. & Schmidtke, D. LADEC: The Large Database of English Compounds. Behav Res 51, 2152–2179 (2019). https://doi.org/10.3758/s13428-019-01282-6
