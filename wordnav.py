@@ -54,7 +54,7 @@ def main():
             
 
         
-        text_input = hd.text_input(placeholder="Guess here...")
+        text_input = hd.text_input(placeholder="guess here...")
         if state.current == len(chain) - 1: # player wins, all words guessed
             pass
         if text_input.value == state.words[state.current]:
@@ -63,7 +63,7 @@ def main():
             state.current += 1
             text_input.value = ""
 
-        if hd.button("Reset Chain").clicked:
+        if hd.button("reset chain").clicked:
             reset_chain()
             print(state.guessed)
 
