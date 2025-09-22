@@ -14,20 +14,26 @@ for index, row in data.iterrows():
 output = open('graph.pkl', 'wb')
 pickle.dump(graph, output)
     
-def dfs(first, visited, chain, max_length):
+def dfs(first, visited, chain, max_length, allow_duplicates):
     if len(chain) >= max_length:
         return chain
 
     visited.add(first)
+    random.shuffle(graph[first])
     for second in graph[first]:
-        if second in graph and second not in visited:
+        if (second in graph and
+            (allow_duplicates or second not in visited)):
             chain.append([first, second])
-            return dfs(second, visited, chain, max_length)
+            return dfs(second, visited, chain, max_length, allow_duplicates)
         
-def generate_chain(chain_length):
+def generate_chain(chain_length, allow_duplicates=True):
     chain = None
     while not chain: # starting with a random choice might not always have a solution path
-        chain = dfs(random.choice(list(graph.keys())), set(), [], chain_length)
+        chain = dfs(random.choice(list(graph.keys())),
+                    set(),
+                    [],
+                    chain_length,
+                    allow_duplicates)
     print(chain)
     return chain
 
