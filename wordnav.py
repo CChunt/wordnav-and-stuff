@@ -5,56 +5,65 @@ import chains
 with open("graph.pkl", 'rb') as f:
     graph = pickle.load(f)
 
-chain = chains.generate_chain(chain_length=10,
-                              allow_duplicates=False)
-guessed_words = [w[0][0] for w in chain]
-guessed_words[0] = chain[0][0]
-guessed_words[-1] = chain[-1][0]
+chain = chains.generate_chain(chain_length=10, allow_duplicates=False)
 
 def main():
     color = "#01261b"
-    global guessed_words
+    firsts = [c[0] for c in chain]
+    guessed_list = [False for _ in range(len(chain))]    
+    state = hd.state(words=firsts,
+                     guessed=guessed_list,
+                     current=1)
+    
+    def reset_chain():
+        chain = chains.generate_chain(chain_length=10, allow_duplicates=False)
+        print(chain)
+        firsts = [c[0] for c in chain]
+        guessed_list = [False for _ in range(len(chain))]
+        state.words = firsts
+        state.guessed = guessed_list
+        state.current = 1
+                
     with hd.box(
             gap=1,
-            padding=1,
+            padding=10,
             justify="center",
             background_color=color,
             grow=True,
             min_height="25vh",
     ):
-        print(chain)
         hd.text(
             "wordnav",
             font_size="2x-large",
             text_align="center",
             padding = 1,
         )
-        
-        for i in range(0, len(guessed_words)):
+
+        hd.text(state.words[0], font_size="large", text_align="start")
+        for i in range(1, len(state.words) - 1):
             with hd.scope(i):
-                word = guessed_words[i]
+                string = state.words[i] if state.guessed[i] else state.words[i][0]
                 hd.text(
-                    word,
+                    string,
                     font_size="large",
                     text_align="start"
                 )
+        hd.text(state.words[-1], font_size="large", text_align="start")
+            
 
-        text_input = hd.text_input(
-            placeholder="Guess here...",
-            font_family="mono",
-            font_style="italic",
-            autofocus=True
-        )
         
-        state = hd.state(i = 1)
-        if state.i == len(chain) - 1:
-            # player wins, all words guessed
+        text_input = hd.text_input(placeholder="Guess here...")
+        if state.current == len(chain) - 1: # player wins, all words guessed
             pass
-        if text_input.value == chain[state.i][0]:
-            guessed_words[state.i] = chain[state.i][0]
-            print(guessed_words)
-            state.i += 1
+        if text_input.value == state.words[state.current]:
+            #words[curr.i] = chain[curr.i][0]
+            state.guessed[state.current] = True
+            state.current += 1
             text_input.value = ""
+
+        if hd.button("Reset Chain").clicked:
+            reset_chain()
+            print(state.guessed)
 
         hd.box(
             background_color=color,

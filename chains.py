@@ -34,7 +34,6 @@ def generate_chain(chain_length, allow_duplicates=True):
                     [],
                     chain_length,
                     allow_duplicates)
-    print(chain)
     return chain
 
 if __name__ == "__main__":
