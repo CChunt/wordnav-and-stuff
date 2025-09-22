@@ -42,11 +42,13 @@ def main():
         hd.text(state.words[0], font_size="large", text_align="start")
         for i in range(1, len(state.words) - 1):
             with hd.scope(i):
+                text_color = "red-500" if i == state.current else "neutral-1000"
                 string = state.words[i] if state.guessed[i] else state.words[i][0]
                 hd.text(
                     string,
                     font_size="large",
-                    text_align="start"
+                    font_color=text_color,
+                    text_align="start",
                 )
         hd.text(state.words[-1], font_size="large", text_align="start")
             
